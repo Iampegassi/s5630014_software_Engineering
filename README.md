@@ -1,1 +1,1 @@
-# s5630014_software_Engineering
+# Fashion items classification
