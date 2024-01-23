@@ -41,4 +41,6 @@ The fashion-mnist dataset was used which consists of 60,000 training images and 
 
 9- Ankle boot
 
-Each image in the dataset is a 28x28 pixel grayscale image. Each row is a separate image, column 1 is the class label. The other columns are pixel numbers which are 784 in total. Each value is the darkness of the pixel (1 to 255). [Get Here](http:[//kahlan.eps.surrey.ac.uk/savee/Download.html](https://www.kaggle.com/datasets/zalando-research/fashionmnist)https://www.kaggle.com/datasets/zalando-research/fashionmnist)
+Each image in the dataset is a 28x28 pixel grayscale image. Each row is a separate image, column 1 is the class label. The other columns are pixel numbers which are 784 in total. Each value is the darkness of the pixel (1 to 255). [Get Here](https://www.kaggle.com/datasets/zalando-research/fashionmnist)
+
+### Model architecture
