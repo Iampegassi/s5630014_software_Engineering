@@ -70,7 +70,6 @@ def custom_collate_fn(batch):
     return image_batch_tensor, label_batch_tensor
 
 
-
 def load_data(data_path, batch_sz=100, train_val_split=[0.7, 0.3]):
     assert sum(train_val_split) == 1, "Train and val fractions should sum to 1!"  # Always a good idea to use static asserts when processing arguments that are passed in by a user!
     # Instantiate our previously defined dataset
@@ -84,7 +83,7 @@ def load_data(data_path, batch_sz=100, train_val_split=[0.7, 0.3]):
 
     train_split, val_split = random_split(dataset, tr_va)
 
-    # Use Pytorch DataLoader to load each split into memory. It's important to pass in our custom collate function, so it knows how to interpret the
+     # Use Pytorch DataLoader to load each split into memory. It's important to pass in our custom collate function, so it knows how to interpret the
     # data and load it. num_workers tells the DataLoader how many CPU threads to use so that data can be loaded in parallel, which is faster
 
     # Get CPU count
@@ -128,6 +127,7 @@ class EarlyStopper:
         return False
 
 
+
 class NeuralNetwork(nn.Module):
   def __init__(self, input_size, hidden_size, num_classes):
     super(NeuralNetwork, self).__init__()
@@ -146,6 +146,7 @@ class NeuralNetwork(nn.Module):
 
 
 from torch.optim.lr_scheduler import ExponentialLR
+
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_dl, val_dl = load_data(f"fashion-mnist_train.csv", batch_sz=16)
 n_input = 28*28
@@ -157,12 +158,13 @@ epoch = 10
 model = NeuralNetwork(n_input, n_hidden, n_classes)
 model = model.to(DEVICE)
 criterion = nn.CrossEntropyLoss()
-optimiser = optim.SGD(model.parameters(), lr=0.001, momentum =0.9)
+optimiser = optim.SGD(model.parameters(), lr=0.0003, momentum =0.9)
 
-gamma = 0.8 #gama is multiplied by the lr every epoch, decreasing the learning rate every time
+gamma = 0.9 #gama is multiplied by the lr every epoch, decreasing the learning rate every time
 schd = ExponentialLR(optimiser,gamma)
 
 print(f"usig device: {DEVICE}")
+
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -187,7 +189,20 @@ early_stopper = EarlyStopper()
 # Specify the training CSV path
 train_csv_path = "fashion-mnist_train.csv"
 
-#training loop
+# Initialize EarlyStopper with a maximum of 3 epochs
+early_stopper = EarlyStopper()
+
+# Set your desired checkpoint frequency
+def save_checkpoint(model, epoch, save_dir):
+    checkpoint = {
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        # Add any other information you want to save
+    }
+    torch.save(checkpoint, os.path.join(save_dir, f'checkpoint_{epoch}.pth'))
+# Initialize Tensorboard writer
+writer = SummaryWriter()
+
 def train_mlp(net, criterion, optimiser, train_dl, writer, epoch, stopper, checkpoint_frequency):
     running_loss = 0.0
     running_acc = 0.0
@@ -243,37 +258,39 @@ def val_mlp(net, criterion, val_dl):
 
     return epoch_loss, epoch_acc
 
-# Set your desired checkpoint frequency
+
+ # Set your desired checkpoint frequency
 checkpoint_frequency = 1
 
-# for epoch in range(10):
-#     train_loss, train_acc = train_mlp(model, criterion, optimiser, train_dl, writer, epoch, early_stopper, checkpoint_frequency)
-#     val_loss, val_acc = val_mlp(model, criterion, val_dl)
+for epoch in range(10):
+    
+    train_loss, train_acc = train_mlp(model, criterion, optimiser, train_dl, writer, epoch, early_stopper, checkpoint_frequency)
+    val_loss, val_acc = val_mlp(model, criterion, val_dl)
+    
+    writer.add_scalar('Loss/train', train_loss, epoch)
+    writer.add_scalar('Loss/val', val_loss, epoch)
 
-#     writer.add_scalar('Loss/train', train_loss, epoch)
-#     writer.add_scalar('Loss/val', val_loss, epoch)
+    writer.add_scalar('Accuracy/train', train_acc, epoch)
+    writer.add_scalar('Accuracy/val', val_acc, epoch)
+    
+    if epoch % checkpoint_frequency == 0:
+        save_checkpoint(model, epoch, "saved_models")
+    # Check whether we should stop the training based on the maximum epochs
+    if early_stopper.should_stop(val_acc):
+        print(f"\nStopping after {early_stopper.epoch_counter} epochs.")
+        # If stopping, save the model's state
+        save_checkpoint(model, epoch, "saved_models")
+        break
+    print(f"Epoch {epoch}, train_loss: {train_loss}, train_acc: {train_acc}, val_loss: {val_loss}, val_acc: {val_acc}")
 
-#     writer.add_scalar('Accuracy/train', train_acc, epoch)
-#     writer.add_scalar('Accuracy/val', val_acc, epoch)
+print("Finished Training")
 
-#     # Log loss and accuracy metrics using the writer so we can see them in Tensorboard
-#     # Check whether we need to save the model to a checkpoint file
-#     if epoch % checkpoint_frequency == 0:
-#         save_checkpoint(model, epoch, f"saved_models")  # Adjust the path
-
-#     # Check whether we should stop the training based on the maximum epochs
-#     if early_stopper.should_stop(val_acc):
-#         print(f"\nStopping after {early_stopper.epoch_counter} epochs.")
-#         # If stopping, save the model's state
-#         save_checkpoint(model, epoch, f"saved_models")  # Adjust the path
-#         break
-
-#     print(f"Epoch {epoch}, train_loss: {train_loss}, train_acc: {train_acc}, val_loss: {val_loss}, val_acc: {val_acc}")
-
-# print("Finished Training")
+# Close Tensorboard writer
+writer.close()
 
 
 # exit()
+# Define the CNN Module
 # Define the CNN Module
 class CNN(nn.Module):
     def __init__(self, num_classes=10):
@@ -282,15 +299,18 @@ class CNN(nn.Module):
         # Convolutional layers
         self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1)
         self.relu1 = nn.ReLU()
+        self.pool1 = nn.MaxPool2d(kernel_size=2)
 
         self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
         self.relu2 = nn.ReLU()
+        self.pool2 = nn.MaxPool2d(kernel_size=2)
 
         self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, stride=1, padding=1)
         self.relu3 = nn.ReLU()
+        self.pool3 = nn.MaxPool2d(kernel_size=2)
 
         # Fully connected layers
-        self.fc1 = nn.Linear(128 * 28 * 28, 512)
+        self.fc1 = nn.Linear(128 * 3 * 3, 512)
         self.relu4 = nn.ReLU()
         self.fc2 = nn.Linear(512, num_classes)
         self.softmax = nn.Softmax(dim=1)
@@ -298,16 +318,21 @@ class CNN(nn.Module):
     def forward(self, x):
         # Convolutional layers
         x = self.relu1(self.conv1(x))
+        x = self.pool1(x)
         x = self.relu2(self.conv2(x))
+        x = self.pool2(x)
         x = self.relu3(self.conv3(x))
+        x = self.pool3(x)
 
         # Flatten the output for fully connected layers
+        
         x = x.view(x.size(0), -1)
-
+        
         x = self.relu4(self.fc1(x))
         x = self.fc2(x)
         x = self.softmax(x)
         return x
+
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -331,10 +356,16 @@ print(f"usig device: {DEVICE}")
 # Initialize EarlyStopper with a maximum of 3 epochs
 early_stopper = EarlyStopper()
 
-# Set your desired checkpoint frequency
-checkpoint_frequency = 1
+def save_checkpoint(model, epoch, save_path):
+    # Save the model's state dictionary along with other relevant information
+    checkpoint = {
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        # Add any other information you want to save, e.g., optimizer state, loss history, etc.
+    }
+    torch.save(checkpoint, os.path.join(save_path, f'cnn_checkpoint_{epoch}.pth'))
 
-# Initialize Tensorboard writer
+
 writer = SummaryWriter()
 
 # Training loop
@@ -415,17 +446,17 @@ for epoch in range(10):
     # Log loss and accuracy metrics using the writer so we can see them in Tensorboard
     # Check whether we need to save the model to a checkpoint file
     if epoch % checkpoint_frequency == 0:
-        save_checkpoint(cnn_model, epoch, f"saved_models")
+        save_checkpoint(cnn_model, epoch, "saved_models")
 
     # Check whether we should stop the training based on the maximum epochs
     if early_stopper.should_stop(val_acc):
         print(f"\nStopping after {early_stopper.epoch_counter} epochs.")
         # If stopping, save the model's state
-        save_checkpoint(cnn_model, epoch, f"saved_models")
+        save_checkpoint(cnn_model, epoch, "saved_models")
         break
     print(f"Epoch {epoch}, train_loss: {train_loss}, train_acc: {train_acc}, val_loss: {val_loss}, val_acc: {val_acc}")
 
 print("Finished Training")
 
-# Close Tensorboard writer
+# close Tensorboard writer
 writer.close()

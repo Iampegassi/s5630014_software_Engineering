@@ -1,0 +1,5 @@
+saved_models/
+runs/
+venv/
+*.csv
+data/
