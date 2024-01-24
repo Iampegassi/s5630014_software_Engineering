@@ -4,7 +4,7 @@ Ojima Adaji (ID: s5630014)
 ## Abstract
 Over the years, much research has been done in the fashion industry to automate fashion processes. Different systems, classifiers, and variations of feature extraction algorithms have been developed for fashion product classification tasks. The rise of deep learning techniques over time has replaced traditional classification techniques. In this project, two deep neural network methods for image classification of fashion items were used with a focus on their accuracy rates.
 
-## Detailed Description
+## Introduction
 
 Traditional machine learning algorithms manually extracted features from images for classification purposes, however, there were limitations in handling large datasets which led to the rise of deep learning algorithms (Xu et al. 2022). Table 1 gives a summary of traditional classification methods and techniques.
 
@@ -14,6 +14,11 @@ Traditional machine learning algorithms manually extracted features from images 
 
 
 In recent years, CNN has been adapted as a better alternative to the traditional classification techniques. This is because they have been improved models with new network structures that use multi-convolutional layers for fashion classification with good accuracy (Nocentini et al. 2022).  Due to its advantages, two neural network models will be trained for a fashion classification task using the same datasets. The differences in their performance will be shown below. 
+
+## Literature Review
+
+Fashion classification can be challenging due to the diverse properties and attributes that are perculiar to an individual product. However, the emergence of deep learning techniques has been used to achieve good results in computer vision
+
 
 
 ### Datasets
@@ -57,7 +62,9 @@ The 'val_mlp' function evaluates the model on the evaluation datasets and loss a
 
 Results show that during training, the validation accuracy reached a maximum of approximately 46% after 10 epochs, and the corresponding validation loss was around 2.26. However, the accuracy did not improve further. The training process was completed, and the best model state was saved.
 
-![CNN (2)](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/08db2222-2291-4430-a810-d8074ce90c8b)
+
+![CNN (3)](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/fc18ecea-0fbf-4ca5-af87-835c3f428858)
+
 #### 2. Convolutional neural network model with PyTorch
 
 This PyTorch code defines a concise Convolutional Neural Network (CNN) class with convolutional and fully connected layers. It initializes an instance of the CNN class and sets up a neural network using another class, NeuralNetwork. The constructor (init method) includes a num_classes parameter for classification output. Three convolutional layers (conv1, conv2, conv3) with ReLU activations and two fully connected layers (fc1, fc2) with ReLU and softmax activations are specified. The 'forward' method defines the forward pass
