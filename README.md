@@ -52,14 +52,16 @@ The fashion-mnist dataset was used which consists of 60,000 training images and 
 
 Each image in the dataset is a 28x28 pixel grayscale image. Each row is a separate image, column 1 is the class label. The other columns are pixel numbers which are 784 in total. Each value is the darkness of the pixel (1 to 255). [Get Here](https://www.kaggle.com/datasets/zalando-research/fashionmnist)
 
-### 3.1  FashionMnistDataset Class
+The datasets were further preprocessed and visualized. This is explained in the sub-heads below.
+
+###  3.1   FashionMnistDataset Class
 A PyTorch dataset class 'FashionMnistDataset' was defined. It is a CSV file containing fashion image data.
 + This class inherits from PyTorch's Dataset class.
 + The __init__ method takes a file path as input, reads the data from a CSV file located at that path using Pandas, and stores it in the self.dataset attribute.
 + The __len__ method returns the number of samples in the dataset.
 + The __getitem__ method is used to retrieve an item (image and label) at a given index from the dataset.
 
-### 3.2 Auxillary functions
+###  3.2  Auxillary functions
 This includes some functions and they are explained below.
 
 #### Process_image Function:
@@ -68,7 +70,7 @@ This includes some functions and they are explained below.
 + Applies transformation (transform) to the image.
 + Utilizes the defined DATA_PREFIX variable.
 
-Get_image_tensor Function:
+#### Get_image_tensor Function:
 + Takes Pandas Series (pd_series) and threshold as input.
 + Extracts pixel values from the series.
 + Converts values into a PyTorch FloatTensor.
@@ -90,6 +92,20 @@ The function is responsible for efficiently loading and splitting the fashion im
 + Use fractions for training and validation splits (0.7, 0.3)
 + Use a batch_size of 16 in the dataloader.
 + incorporates the custom collate function (custom_collate_fn) for efficient data loading.
+
+###  3.3  Data visualization function
+This creates visual representations of the fashion image data at various stages and is further discussed with the sub-heads below.
+
+#### Image grid and batch display functions:
+image_grid: This function takes a batch of images and arranges them into a grid for visualization. It reshapes the images and concatenates them to create a grid.
+show_batch: This uses the image_grid function to display a batch of images. It sets up the figure and displays the images in a grid format.
+
+#### Display fashion items by label function:
+
+This function displays a fashion item from the dataset based on the specified label. It takes a DataFrame, filters it based on the label, and visualizes the first image found for that label.
+
+#### Data augmentation 
+This section provides an example of data augmentation using PyTorch's transforms module. It includes code for horizontal and vertical flips, random rotations, and demonstrates how to apply these transformations to a batch of images.
 
 ## 4.  Model architecture
 
