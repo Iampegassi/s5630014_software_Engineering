@@ -60,7 +60,9 @@ A PyTorch dataset class 'FashionMnistDataset' was defined. It is a CSV file cont
 + The __getitem__ method is used to retrieve an item (image and label) at a given index from the dataset.
 
 ### 3.2 Auxillary functions
-Process_image Function:
+This includes some functions and they are explained below.
+
+#### Process_image Function:
 + Takes image file name as input.
 + Opens image using Python Imaging Library (PIL).
 + Applies transformation (transform) to the image.
@@ -72,7 +74,7 @@ Get_image_tensor Function:
 + Converts values into a PyTorch FloatTensor.
 + Reshape the tensor into a 1x28x28 format.
 
-### 3.3 Custom Collate function
+#### Custom Collate function
 
 The custom_collate_fn function processes a batch of data, loads images and labels and prepares them for training. It does this by:
 + Creating an empty tensor (`image_batch_tensor`) to store the loaded images.
@@ -80,7 +82,7 @@ The custom_collate_fn function processes a batch of data, loads images and label
 + Concatenates the individual image tensors into a single batch tensor.
 + Creates a tensor (`label_batch_tensor`) containing the corresponding labels.
 
-### 3.4 Load data function
+#### Data loading function
 
 The function is responsible for efficiently loading and splitting the fashion image dataset into training and validation sets. It utilizes PyTorch's DataLoader for batch processing and does this by:
 
