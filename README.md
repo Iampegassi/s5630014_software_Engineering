@@ -72,7 +72,7 @@ Get_image_tensor Function:
 + Converts values into a PyTorch FloatTensor.
 + Reshape the tensor into a 1x28x28 format.
 
-### 3.3 Custom Collate Function
+### 3.3 Custom Collate function
 
 The custom_collate_fn function processes a batch of data, loads images and labels and prepares them for training. It does this by:
 + Creating an empty tensor (`image_batch_tensor`) to store the loaded images.
@@ -80,6 +80,14 @@ The custom_collate_fn function processes a batch of data, loads images and label
 + Concatenates the individual image tensors into a single batch tensor.
 + Creates a tensor (`label_batch_tensor`) containing the corresponding labels.
 
+### 3.4 Load data function
+
+The function is responsible for efficiently loading and splitting the fashion image dataset into training and validation sets. It utilizes PyTorch's DataLoader for batch processing and does this by:
+
++ Instantiating the FashionMNISTDataset using the provided data_path.
++ Use fractions for training and validation splits (0.7, 0.3)
++ Use a batch_size of 16 in the dataloader.
++ incorporates the custom collate function (custom_collate_fn) for efficient data loading.
 
 ## 4.  Model architecture
 
