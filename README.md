@@ -59,6 +59,18 @@ A PyTorch dataset class 'FashionMnistDataset' was defined. It is a CSV file cont
 + The __len__ method returns the number of samples in the dataset.
 + The __getitem__ method is used to retrieve an item (image and label) at a given index from the dataset.
 
+### 3.2 Auxillary functions
+Process_image Function:
++ Takes image file name as input.
++ Opens image using Python Imaging Library (PIL).
++ Applies transformation (transform) to the image.
++ Utilizes the defined DATA_PREFIX variable.
+
+Get_image_tensor Function:
++ Takes Pandas Series (pd_series) and threshold as input.
++ Extracts pixel values from the series.
++ Converts values into a PyTorch FloatTensor.
++ Reshape the tensor into a 1x28x28 format.
 
 ## 4.  Model architecture
 
