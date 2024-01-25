@@ -17,8 +17,9 @@ In recent years, CNN has been adapted as a better alternative to the traditional
 
 ## Literature Review
 
-Fashion classification can be challenging due to the diverse properties and attributes that are perculiar to an individual product. However, the emergence of deep learning techniques has been used to achieve good results in computer vision
+Fashion classification can be challenging due to the unique properties and attributes of an individual product. However, the emergence of CNN a deep learning technique has been used to achieve good results in an image classification task. Three different CNN architectures for image classification using the fashion-mnist dataset were proposed by Bhatnagar et al. (2017). Results show an accuracy of 92.54% using a two-layered CNN with batch normalization and skip connections.
 
+A CNN-SVM model and CNN-softmax model were used on a fashion-mnist dataset by Agarap (2019). An accuracy of 90.72% was achieved using the CNN-SVM model while the CNN-softmax model had a test accuracy of 91.86%.
 
 
 ### Datasets
