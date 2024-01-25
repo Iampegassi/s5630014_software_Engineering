@@ -72,6 +72,15 @@ Get_image_tensor Function:
 + Converts values into a PyTorch FloatTensor.
 + Reshape the tensor into a 1x28x28 format.
 
+### 3.3 Custom Collate Function
+
+The custom_collate_fn function processes a batch of data, loads images and labels and prepares them for training. It does this by:
++ Creating an empty tensor (`image_batch_tensor`) to store the loaded images.
++ Iterates through the batch and loads each image using the `get_image_tensor` function with a specified threshold.
++ Concatenates the individual image tensors into a single batch tensor.
++ Creates a tensor (`label_batch_tensor`) containing the corresponding labels.
+
+
 ## 4.  Model architecture
 
 ![Simple Neural Network (1)](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/3b525249-4fee-445b-b057-349623857818)
