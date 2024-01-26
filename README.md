@@ -2,7 +2,7 @@
 Ojima Adaji (ID: s5630014)
 
 ## Abstract
-Over the years, much research has been done in the fashion industry to automate fashion processes. Different systems, classifiers, and variations of feature extraction algorithms have been developed for fashion product classification tasks. The rise of deep learning techniques over time has replaced traditional classification techniques. In this project, two deep neural network methods for image classification of fashion items were used with a focus on their accuracy rates.
+Over the years, much research has been done in the fashion industry to automate fashion processes. Different systems, classifiers, and variations of feature extraction algorithms have been developed for fashion product classification tasks. The rise of deep learning techniques over time has replaced traditional classification techniques. In this project, two deep neural network methods for image classification of fashion items were compared with reference to their accuracy rates.
 
 ## 1. Introduction
 
@@ -13,18 +13,19 @@ Traditional machine learning algorithms manually extracted features from images 
 
 
 
-In recent years, CNN has been adapted as a better alternative to the traditional classification techniques. This is because they have been improved models with new network structures that use multi-convolutional layers for fashion classification with good accuracy (Nocentini et al. 2022).  Due to its advantages, two neural network models will be trained for a fashion classification task using the same datasets. The differences in their performance will be shown below. 
+In recent years, CNN has been adapted as a better alternative to the traditional classification techniques. This is because they have been improved models with new network structures that use multi-convolutional layers for fashion classification with good accuracy (Nocentini et al. 2022).  Due to its advantages, two neural network models will be trained for a fashion classification task using the same datasets. A comparison of their performance will be discussed below. 
 
 ## 2. Literature Review
 
-Fashion image classification can be challenging due to the unique properties and attributes of an individual product. However, the emergence of CNN a deep learning technique has been used to achieve good results in an image classification task. 
-
+Fashion image classification can be challenging due to the unique properties and attributes of an individual product. However, the emergence of CNN a deep learning technique, has demonstrated notable success in addressing the challenges of fashion image classification tasks.
 
 Three different CNN architectures for image classification using the fashion-mnist dataset were proposed by Bhatnagar et al. (2017). Results show an accuracy of 92.54% using a two-layered CNN with batch normalization and skip connections.
 
 A CNN-SVM model and CNN-softmax model were used on a fashion-mnist dataset by Agarap (2019). An accuracy of 90.72% was achieved using the CNN-SVM model while the CNN-softmax model had a test accuracy of 91.86%.
 
 Different forms of CNN were applied for image classification using the fashion-mnist dataset by Xhaferra et al. (2022).To resolve the issue of model overfitting, CNN-C1 and CNN-C2 were compared to determine the model with the best result. Results show that CNN-C2 is best with an accuracy of 93.11% compared to CNN-C1 with an accuracy of 88.95%.
+
+However, there are limitations to using CNN on the Fashion MNIST dataset because of its susceptibility to overfitting, challenges in capturing intricate details, and the computational intensity of training.
 
 ## 3. Datasets
 
@@ -155,4 +156,41 @@ The model evolves over 10 epochs, starting with a training loss of 1.83 (63.68% 
 
 ## 5. Results 
 The testing loop output shows the assessment of the pre-trained Convolutional Neural Network (CNN) model using the `test_model` function. This function computes and displays the test accuracy and loss on fashion-mnist test datasets. After loading a saved checkpoint and extracting the model's state dictionary, a new instance of the CNN model is initialized. The model is then moved to the GPU. The testing function is executed, producing the following metrics: Test Accuracy of 73.82% and Test Loss of 1.7219%.
+
+A unit test class, `TestFashionClassification`, was created to evaluate the pre-trained CNN model and the key points include:
+
+#### Setup (`setUp` method):
++ Loads a pre-trained model from a checkpoint.
++ Initializes the model, device (CPU or GPU), test dataset, and data loader.
++ Sets the criterion for loss calculation.
+
+#### Model Prediction Test (`test_model_prediction` method):
++ Verifies that model predictions fall within the expected range (0 to 9).
+
+#### Model Accuracy Test (`test_model_accuracy` method):
++ Validates the accuracy calculation for model predictions, ensuring it lies between 0 and 1.
+
+#### Data Loader Test (`test_data_loader` method):
++ Checks the shape of inputs and labels in the data loader.
+
+#### Model Training Test (`test_model_training` method):
++ Tests the model training process for a few epochs using a simple optimizer.
+
+#### Model Save and Load Test (`test_model_save_load` method):
++ Saves and loads the model state, ensuring the loaded model is an instance of the CNN class.
+
+#### Model Forward Pass Test (`test_model_forward_pass` method):
++ Validates the shape of the output from a forward pass.
+
+#### Early Stopping Test (`test_early_stopping` method):
++ Sets up an early stopper and simulates a training loop, verifying the correct epoch counter.
+
+Finally, the code runs seven tests with no errors or failures, indicating successful execution.
+
+
+## Conclusion
+In conclusion, results from comparing the performance of the simple neural network and the CNN model on the fashion-mnist dataset show that the CNN model accuracy in the training and testing loop outperforms the simple neural network. However,  experimenting with deeper architectures, adjusting hyperparameters and exploring regularization techniques can further enhance the  CNN model. Implementing transfer learning using pre-trained models for relevant tasks could also be considered.  
+
+## References
+[1] Agarap, A. F., 2019. An Architecture Combining Convolutional Neural Network (CNN) and Support Vector Machine (SVM) for Image Classification [online]. arXiv.org. Available from: https://arxiv.org/abs/1712.03541v2 [Accessed 25 Jan 2024].
 
