@@ -129,9 +129,23 @@ Results show that during training, the validation accuracy reached a maximum of 
 
 ![CNN (3)](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/fc18ecea-0fbf-4ca5-af87-835c3f428858)
 
-#### 2. Convolutional neural network model with PyTorch
+### 2. Convolutional neural network model with PyTorch
 
-This PyTorch code defines a concise Convolutional Neural Network (CNN) class with convolutional and fully connected layers. It initializes an instance of the CNN class and sets up a neural network using another class, NeuralNetwork. The constructor (init method) includes a num_classes parameter for classification output. Three convolutional layers (conv1, conv2, conv3) with ReLU activations and two fully connected layers (fc1, fc2) with ReLU and softmax activations are specified. The 'forward' method defines the forward pass
+This PyTorch code defines a Convolutional Neural Network (CNN) using PyTorch's neural network module (`nn.Module`). Let's break down the key components:
+
+#### Initialization (`__init__` method):
++  `self.conv1`, `self.conv2`, and `self.conv3` define three convolutional layers with increasing output channels, applying ReLU activation after each convolution, and followed by max-pooling.
++  `self.fc1` and `self.fc2` define two fully connected layers, applying ReLU activation after the first fully connected layer.
++ `self.softmax` is the softmax activation used for the final output layer.
+
+
+#### Forward Pass (`forward` method):
++ The forward method specifies how input data should pass through the network.
++ Convolutional layers (`self.conv1`, `self.conv2`, `self.conv3`) are followed by ReLU activation and max-pooling.
++ The output is then flattened and passed through fully connected layers (`self.fc1`, `self.fc2`) with ReLU activation.
++ The final output is obtained using the softmax activation.
+
+This CNN architecture is suitable for image classification tasks, and it includes convolutional layers for feature extraction and fully connected layers for classification. The ReLU activation functions introduce non-linearity, and the softmax activation at the output provides probabilities for different classes.
 
 
 
