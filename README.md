@@ -124,10 +124,7 @@ The `__init__` method, acting as the class constructor, initializes the neural n
 
 The training loop uses a batch size of 16, with a 70-30 split for training and validation. Running for 10 epochs, it employs PyTorch's multi-layer perceptron, utilizing `train_mlp` and `val_mlp` functions for training and validation. The code logs loss, accuracy, and implements early stopping based on validation accuracy. Checkpoints are saved at a specified frequency, and input reshaping is performed for each batch. Loss and accuracy metrics are recorded using Tensorboard's 'Summary Writer'.
 
-
-
-
-Results show that during training, the validation accuracy reached a maximum of approximately 46% after 10 epochs, and the corresponding validation loss was around 2.26. However, the accuracy did not improve further. The training process was completed, and the best model state was saved.
+Results show that during training, the validation accuracy reached a maximum of 57% after 10 epochs, and the corresponding validation loss was 1.89%. However, the accuracy did not improve further so the best model using this network was not saved.
 
 
 ![CNN (3)](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/fc18ecea-0fbf-4ca5-af87-835c3f428858)
