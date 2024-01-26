@@ -157,8 +157,8 @@ The testing loop output shows the assessment of the pre-trained Convolutional Ne
 A unit test class, `TestFashionClassification`, was created to evaluate the pre-trained CNN model and the key points include:
 
 #### Setup (`setUp` method):
-+ Loads a pre-trained model from a checkpoint.
-+ Initializes the model, device (CPU or GPU), test dataset, and data loader.
++ Loads the pre-trained CNN model from a checkpoint.
++ Initializes the model, device (GPU), test dataset, and data loader.
 + Sets the criterion for loss calculation.
 
 #### Model Prediction Test (`test_model_prediction` method):
