@@ -149,6 +149,7 @@ This PyTorch code defines a Convolutional Neural Network (CNN) using PyTorch's n
 
 The training loop iterates for 10 epochs, incorporating periodic checkpoint saving and logging of loss and accuracy metrics for both training and validation. The process halts if early stopping criteria are satisfied. Tensorboard is employed for visualization, and the model's state is saved either after training or if early stopping is triggered.
 
+The model evolves over 10 epochs, starting with a training loss of 1.83 (63.68% accuracy) and a validation loss of 1.77 (69.31% accuracy). As training progresses, losses decrease, and accuracies rise. Ultimately, the model attains a training loss of 1.71 (74.65% accuracy) and a validation loss of 1.72 (73.49% accuracy). The best model was saved.
 
 ![CNN_MODEL_GRAPH](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/b23ff801-21d2-407e-a087-b68a203124d5)
 
