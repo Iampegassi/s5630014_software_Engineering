@@ -152,13 +152,13 @@ The model evolves over 10 epochs, starting with a training loss of 1.83 (63.68% 
 ![CNN_MODEL_GRAPH](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/b23ff801-21d2-407e-a087-b68a203124d5)
 
 ## 5. Results 
-The testing loop output shows the assessment of the pre-trained Convolutional Neural Network (CNN) model using the `test_model` function. This function computes and displays the test accuracy and loss on fashion-mnist test datasets. After loading a saved checkpoint and extracting the model's state dictionary, a new instance of the CNN model is initialized. The model is then moved to the GPU. The testing function is executed, producing the following metrics: Test Accuracy of 73.82% and Test Loss of 1.7219%.
+The testing loop output shows the assessment of the pre-trained Convolutional Neural Network (CNN) model using the `test_model` function. This function computes and displays the test accuracy and loss on fashion-mnist test datasets. After loading a saved checkpoint and extracting the model's state dictionary, a new instance of the CNN model is initialized. The model is then moved to the (DEVICE). The testing function is executed, producing the following metrics: Test Accuracy of 73.82% and Test Loss of 1.7219%.
 
 A unit test class, `TestFashionClassification`, was created to evaluate the pre-trained CNN model and the key points include:
 
 #### Setup (`setUp` method):
 + Loads the pre-trained CNN model from a checkpoint.
-+ Initializes the model, device (GPU), test dataset, and data loader.
++ Initializes the model, device, test dataset, and data loader.
 + Sets the criterion for loss calculation.
 
 #### Model Prediction Test (`test_model_prediction` method):
