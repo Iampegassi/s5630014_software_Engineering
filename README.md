@@ -122,9 +122,10 @@ The `__init__` method, acting as the class constructor, initializes the neural n
 +  `self.fc2 = nn.Linear(hidden_size, num_classes)` creates another fully connected layer with `hidden_size` input neurons and `num_classes` output neurons.
 +  `self.softmax = nn.Softmax(dim=1)` then applies the softmax activation function along the second dimension, commonly used for multi-class classification.
 
-For the training loop, using a batch size of 16, the dataset was split into 70% for training and 30% for validation. A multi-layer perceptron by Pytorch was used. It incorporates early stopping to prevent overfitting, checkpoints are saved periodically and utilizes Tensorboard for training visualisation. Input reshaping is performed for each batch, and loss and accuracy metrics are logged using Tensorboard ‘Summary Writer’.
+The training loop uses a batch size of 16, with a 70-30 split for training and validation. Running for 10 epochs, it employs PyTorch's multi-layer perceptron, utilizing `train_mlp` and `val_mlp` functions for training and validation. The code logs loss, accuracy, and implements early stopping based on validation accuracy. Checkpoints are saved at a specified frequency, and input reshaping is performed for each batch. Loss and accuracy metrics are recorded using Tensorboard's 'Summary Writer'.
 
-The 'val_mlp' function evaluates the model on the evaluation datasets and loss and accuracy metrics are computed.
+
+
 
 Results show that during training, the validation accuracy reached a maximum of approximately 46% after 10 epochs, and the corresponding validation loss was around 2.26. However, the accuracy did not improve further. The training process was completed, and the best model state was saved.
 
