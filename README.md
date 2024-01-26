@@ -122,9 +122,11 @@ The `__init__` method, acting as the class constructor, initializes the neural n
 +  `self.fc2 = nn.Linear(hidden_size, num_classes)` creates another fully connected layer with `hidden_size` input neurons and `num_classes` output neurons.
 +  `self.softmax = nn.Softmax(dim=1)` then applies the softmax activation function along the second dimension, commonly used for multi-class classification.
 
-The training loop uses a batch size of 16, with a 70-30 split for training and validation. Running for 10 epochs, it employs PyTorch's multi-layer perceptron, utilizing `train_mlp` and `val_mlp` functions for training and validation. The code logs loss, accuracy, and implements early stopping based on validation accuracy. Checkpoints are saved at a specified frequency, and input reshaping is performed for each batch. Loss and accuracy metrics are recorded using Tensorboard's 'Summary Writer'.
+The training loop adopts a batch size of 16, with a 70-30 split between training and validation data. For 10 epochs, it leverages PyTorch's multi-layer perceptron, employing the `train_mlp` and `val_mlp` functions for training and validation. The code logs loss and accuracy metrics and incorporates early stopping based on validation accuracy. Checkpoints are saved at a defined frequency, and input reshaping is conducted for each batch. Tensorboard's 'Summary Writer' is utilized to record loss and accuracy metrics.
 
 Results show that during training, the validation accuracy reached a maximum of 57% after 10 epochs, and the corresponding validation loss was 1.89%. However, the accuracy did not improve further so the best model using this network was not saved.
+
+![NEURAL-NETWORK_GRAPH](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/7049e8c7-369f-4ac4-a9ea-f1033ef09559)
 
 
 ![CNN (3)](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/fc18ecea-0fbf-4ca5-af87-835c3f428858)
@@ -145,7 +147,9 @@ This PyTorch code defines a Convolutional Neural Network (CNN) using PyTorch's n
 + The output is then flattened and passed through fully connected layers (`self.fc1`, `self.fc2`) with ReLU activation.
 + The final output is obtained using the softmax activation.
 
-This CNN architecture is suitable for image classification tasks, and it includes convolutional layers for feature extraction and fully connected layers for classification. The ReLU activation functions introduce non-linearity, and the softmax activation at the output provides probabilities for different classes.
+The training loop iterates for 10 epochs, incorporating periodic checkpoint saving and logging of loss and accuracy metrics for both training and validation. The process halts if early stopping criteria are satisfied. Tensorboard is employed for visualization, and the model's state is saved either after training or if early stopping is triggered.
 
+
+![CNN_MODEL_GRAPH](https://github.com/Iampegassi/s5630014_software_Engineering/assets/149077212/b23ff801-21d2-407e-a087-b68a203124d5)
 
 
