@@ -2,7 +2,7 @@
 Ojima Adaji (ID: s5630014)
 
 ## Abstract
-Over the years, much research has been done in the fashion industry to automate fashion processes. Different systems, classifiers, and variations of feature extraction algorithms have been developed for fashion product classification tasks. The rise of deep learning techniques over time has replaced traditional classification techniques. In this project, two deep neural network methods for image classification of fashion items were compared with reference to their accuracy rates.
+Over the years, much research has been done in the fashion industry to automate fashion processes. Different systems, classifiers, and variations of feature extraction algorithms have been developed for fashion product classification tasks. The rise of deep learning techniques over time has replaced traditional classification techniques. In this project, two deep neural network methods for image classification of fashion items were compared regarding their accuracy rates.
 
 ## 1. Introduction
 
@@ -17,15 +17,7 @@ In recent years, CNN has been adapted as a better alternative to the traditional
 
 ## 2. Literature Review
 
-Fashion image classification can be challenging due to the unique properties and attributes of an individual product. However, the emergence of CNN a deep learning technique, has demonstrated notable success in addressing the challenges of fashion image classification tasks.
-
-Three different CNN architectures for image classification using the fashion-mnist dataset were proposed by Bhatnagar et al. (2017). Results show an accuracy of 92.54% using a two-layered CNN with batch normalization and skip connections.
-
-A CNN-SVM model and CNN-softmax model were used on a fashion-mnist dataset by Agarap (2019). An accuracy of 90.72% was achieved using the CNN-SVM model while the CNN-softmax model had a test accuracy of 91.86%.
-
-Different forms of CNN were applied for image classification using the fashion-mnist dataset by Xhaferra et al. (2022).To resolve the issue of model overfitting, CNN-C1 and CNN-C2 were compared to determine the model with the best result. Results show that CNN-C2 is best with an accuracy of 93.11% compared to CNN-C1 with an accuracy of 88.95%.
-
-However, there are limitations to using CNN on the Fashion MNIST dataset because of its susceptibility to overfitting, challenges in capturing intricate details, and the computational intensity of training.
+Fashion image classification can be challenging due to the unique properties and attributes of an individual product. However, the emergence of CNN a deep learning technique, has demonstrated notable success in addressing the challenges of fashion image classification tasks. Three different CNN architectures for image classification using the fashion-mnist dataset were proposed by Bhatnagar et al. (2017). Results show an accuracy of 92.54% using a two-layered CNN with batch normalization and skip connections. A CNN-SVM model and CNN-softmax model were used on a fashion-mnist dataset by Agarap (2019). An accuracy of 90.72% was achieved using the CNN-SVM model while the CNN-softmax model had a test accuracy of 91.86%. Different forms of CNN were applied for image classification using the fashion-mnist dataset by Xhaferra et al. (2022).To resolve the issue of model overfitting, CNN-C1 and CNN-C2 were compared to determine the model with the best result. Results show that CNN-C2 is best with an accuracy of 93.11% compared to CNN-C1 with an accuracy of 88.95%. However, there are limitations to using CNN on the Fashion MNIST dataset because of its susceptibility to overfitting, challenges in capturing intricate details, and the computational intensity of training.
 
 ## 3. Datasets
 
@@ -141,6 +133,11 @@ This PyTorch code defines a Convolutional Neural Network (CNN) using PyTorch's n
 +  `self.fc1` and `self.fc2` define two fully connected layers, applying ReLU activation after the first fully connected layer.
 + `self.softmax` is the softmax activation used for the final output layer.
 
+#### Max-Pooling Layers (nn.MaxPool2d):
++ Max-pooling is a downsampling operation that reduces the spatial dimensions of the input.
++ It operates on 2D input tensors (feature maps) and extracts the maximum value from each local region.
++ The kernel_size parameter specifies the size of the pooling window, and it is commonly set to 2 in this code.
++ Max-pooling helps in reducing the spatial resolution, making the network more computationally efficient and promoting translational invariance.
 
 #### Forward Pass (`forward` method):
 + The forward method specifies how input data should pass through the network.
@@ -194,3 +191,14 @@ In conclusion, results from comparing the performance of the simple neural netwo
 ## References
 [1] Agarap, A. F., 2019. An Architecture Combining Convolutional Neural Network (CNN) and Support Vector Machine (SVM) for Image Classification [online]. arXiv.org. Available from: https://arxiv.org/abs/1712.03541v2 [Accessed 25 Jan 2024].
 
+[2] Bhatnagar, S., Ghosal, D. and Kolekar, M. H., 2017. Classification of fashion article images using convolutional neural networks. 2017 Fourth International Conference on Image Information Processing (ICIIP).
+
+[3] kaggle, n.d. Fashion MNIST [online]. www.kaggle.com. Available from: https://www.kaggle.com/datasets/zalando-research/fashionmnist.
+
+[4] McDonnell, M. D. and Vladusich, T., 2015. Enhanced image classification with a fast-learning shallow convolutional neural network. 2015 International Joint Conference on Neural Networks (IJCNN).
+
+[5] Nocentini, O., Kim, J., Bashir, M. Z. and Cavallo, F., 2022. Image Classification Using Multiple Convolutional Neural Networks on the Fashion-MNIST Dataset. Sensors, 22 (23), 9544.
+
+[6] Xhaferra, E., Cina, E. and Toti, L., 2022. Classification of Standard FASHION MNIST Dataset Using Deep Learning Based CNN Algorithms [online]. IEEE Xplore. Available from: https://ieeexplore.ieee.org/document/9932737 [Accessed 25 Jan 2024].
+
+[7] Xu, J., Wei, Y., Wang, A., Zhao, H. and Lefloch, D., 2022. Analysis of Clothing Image Classification Models: A Comparison Study between Traditional Machine Learning and Deep Learning Models. Fibres & Textiles in Eastern Europe, 30 (5), 66–78.
