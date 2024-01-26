@@ -114,7 +114,13 @@ This section provides an example of data augmentation using PyTorch's transforms
 ### 1. Neural Network Model with Pytorch
 Neural network architecture is designed to enable fast model training with low implementation complexity (McDonnell and Vladusich 2015).
 
-A basic PyTorch neural network model was created, featuring two fully connected layers separated by a ReLU activation. The final layer utilizes a softmax activation, suitable for multiclass classification. The 'NeuralNetwork' class encapsulates the network architecture, with the constructor ('init') initializing layers, and the 'forward' method describing the forward pass.
+A basic PyTorch neural network model was created with a class named NeuralNetwork inherited from 'nn.Module'.
+
+The `__init__` method, acting as the class constructor, initializes the neural network layers and activation functions when an object of the class is created.
++  `self.fc1 = nn.Linear(input_size, hidden_size)` creates a fully connected layer with `input_size` neurons and `hidden_size` output neurons.
++  `self.relu = nn.ReLU()` applies the Rectified Linear Unit (ReLU) activation function to the output.
++  `self.fc2 = nn.Linear(hidden_size, num_classes)` creates another fully connected layer with `hidden_size` input neurons and `num_classes` output neurons.
++  `self.softmax = nn.Softmax(dim=1)` then applies the softmax activation function along the second dimension, commonly used for multi-class classification.
 
 For the training loop, using a batch size of 16, the dataset was split into 70% for training and 30% for validation. A multi-layer perceptron by Pytorch was used. It incorporates early stopping to prevent overfitting, checkpoints are saved periodically and utilizes Tensorboard for training visualisation. Input reshaping is performed for each batch, and loss and accuracy metrics are logged using Tensorboard ‘Summary Writer’.
 
